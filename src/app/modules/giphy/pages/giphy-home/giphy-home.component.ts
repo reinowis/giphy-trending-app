@@ -5,7 +5,7 @@ import { Giphy, GiphySearchPayload } from '@shared';
 import { DEFAULT_GIPHY_QUERY } from '@shared/constants';
 import { AppState } from '@state';
 import { GiphyActions, getGiphysSelector } from '@state/giphy';
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-giphy-home',
@@ -13,8 +13,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./giphy-home.component.scss'],
 })
 export class GiphyHomeComponent implements OnInit {
+  destroy$ = new ReplaySubject<boolean>();
   giphyList$: Observable<Giphy[]> = this.store.select(getGiphysSelector);
-  
+
   type: string = 'TRENDING';
   query: GiphySearchPayload = DEFAULT_GIPHY_QUERY;
 
@@ -22,6 +23,11 @@ export class GiphyHomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.initData();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 
   private initData() {
@@ -48,7 +54,8 @@ export class GiphyHomeComponent implements OnInit {
     if ($event) {
       this.query = {
         ...this.query,
-        offset: this.query.offset + this.query.limit * this.query.offset + 1,
+        offset:
+          (this.query.offset == 0 ? 1 : this.query.offset) + this.query.limit,
       };
 
       this.fetchGiphyList();
@@ -58,7 +65,7 @@ export class GiphyHomeComponent implements OnInit {
   onSearch($event: string) {
     if ($event) {
       this.query = {
-        ...this.query,
+        ...DEFAULT_GIPHY_QUERY,
         q: $event,
       };
 

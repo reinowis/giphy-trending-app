@@ -2,6 +2,7 @@ export interface Giphy {
   id: string;
   title: string;
   url: string;
+  bitly_url: string;
   rating: string;
   username: string;
   embed_url: string;
@@ -25,7 +26,7 @@ export interface Giphy {
       height: string;
       size: string;
     };
-  }; 
+  };
 }
 
 export interface GiphyQuery {}
@@ -41,17 +42,20 @@ export interface GiphySearchPayload extends GiphyBaseRequest {
   q?: string;
 }
 
-export interface GiphyResponse {
-  data: Array<Giphy>;
-  pagination: {
-    total_count: number;
-    count: number;
-    offset: number;
-  };
-  meta: {
-    status: number;
-    msg: string;
-    response_id: string;
-  };
+export interface GiphyPagination {
+  total_count: number;
+  count: number;
+  offset: number;
 }
 
+export interface GiphyMeta {
+  status: number;
+  msg: string;
+  response_id: string;
+}
+
+export interface GiphyResponse {
+  data: Array<Giphy>;
+  pagination: GiphyPagination;
+  meta: GiphyMeta;
+}

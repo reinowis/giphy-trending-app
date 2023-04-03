@@ -1,6 +1,10 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { GiphyEntityState, selectAllGiphys, selectGiphyEntities } from "./giphy.reducer";
-import { GiphyActionTypes } from "./giphy.actions";
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import {
+  GiphyEntityState,
+  selectAllGiphys,
+  selectGiphyEntities,
+} from './giphy.reducer';
+import { GiphyActionTypes } from './giphy.actions';
 
 const giphyState = createFeatureSelector<GiphyEntityState>('giphy');
 
@@ -11,8 +15,11 @@ export const getGiphyEntitiesSelector = createSelector(
   selectGiphyEntities
 );
 
-export const getGiphysLoadingSelector = createSelector(giphyState, (state) =>
-  state.loading.includes(GiphyActionTypes.GET_GIPHY_TRENDING)
+export const getGiphysLoadingSelector = createSelector(
+  giphyState,
+  (state) =>
+    state.loading.includes(GiphyActionTypes.GET_GIPHY_TRENDING) ||
+    state.loading.includes(GiphyActionTypes.GET_GIPHY_SEARCH)
 );
 
 export const getSelectedGiphyIdSelector = createSelector(

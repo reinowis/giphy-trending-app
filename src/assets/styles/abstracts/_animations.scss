@@ -1,0 +1,17 @@
+@keyframes dot-elastic-before {
+  50% {
+    transform: scale(1, 0.67);
+  }
+}
+
+@keyframes dot-elastic {
+  50% {
+    transform: scale(1, 1.5);
+  }
+}
+
+@keyframes dot-elastic-after {
+  50% {
+    transform: scale(1, 0.67);
+  }
+}

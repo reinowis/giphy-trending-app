@@ -1,6 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
-import { Giphy, GiphyBaseRequest, GiphySearchPayload } from '@shared/models';
+import {
+  Giphy,
+  GiphyBaseRequest,
+  GiphyPagination,
+  GiphySearchPayload,
+} from '@shared/models';
 
 export enum GiphyActionTypes {
   GET_GIPHY_SEARCH = 'GET_GIPHY_SEARCH',
@@ -17,7 +22,7 @@ export const GetGiphySearch = createAction(
 );
 export const GetGiphySearchSuccess = createAction(
   GiphyActionTypes.GET_GIPHY_SEARCH_SUCCESS,
-  props<{ giphys: Giphy[] }>()
+  props<{ giphys: Giphy[]; pagination: GiphyPagination }>()
 );
 export const GetGiphySearchFailure = createAction(
   GiphyActionTypes.GET_GIPHY_SEARCH_FAILURE,
@@ -30,7 +35,7 @@ export const GetGiphyTrending = createAction(
 );
 export const GetGiphyTrendingSuccess = createAction(
   GiphyActionTypes.GET_GIPHY_TRENDING_SUCCESS,
-  props<{ giphys: Giphy[] }>()
+  props<{ giphys: Giphy[]; pagination: GiphyPagination }>()
 );
 export const GetGiphyTrendingFailure = createAction(
   GiphyActionTypes.GET_GIPHY_TRENDING_FAILURE,

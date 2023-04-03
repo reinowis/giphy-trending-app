@@ -1,0 +1,4 @@
+<div class="image-loader">
+    <img [src]="src" [alt]="alt" [width]="width" [height]="height" (load)="hideLoading()" (error)="hideLoading()">
+    <app-loading *ngIf="loading"></app-loading>
+</div>

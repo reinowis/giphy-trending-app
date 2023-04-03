@@ -1,13 +1,30 @@
-<h2 mat-dialog-title>{{giphy?.title}}</h2>
-<div mat-dialog-content>
-  <img [src]="giphy?.images?.original?.url" [alt]="giphy?.title" />
-    <p>
-        Username: {{ giphy?.username}}
-    </p>
-    <p>
-        Username: {{ giphy?.rating}}
-    </p>
+<div mat-dialog-title>
+  <h2>
+    {{giphy.title}}
+  </h2>
+
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onClose()">Close</button>
+
+<div mat-dialog-content class="giphy-details">
+  <img [src]="giphy.images.original.url" [alt]="giphy.title" class="giphy-details__image"
+    [width]="giphy.images.original.width" [height]="giphy.images.original.height" />
+  <div class="giphy-details__content">
+    <p class="giphy-details__content__item">
+      <mat-icon>person</mat-icon>
+      <span>Username: {{ giphy.username || 'N/A'}}</span>
+    </p>
+    <p class="giphy-details__content__item">
+      <mat-icon>star</mat-icon>
+      <span>Rating: {{ giphy.rating}}</span>
+    </p>
+  </div>
+
+  <div class="giphy-details__actions">
+    <button mat-icon-button (click)="copyURL()" [matTooltip]="'Copy'">
+      <mat-icon>link</mat-icon>
+    </button>
+  </div>
 </div>

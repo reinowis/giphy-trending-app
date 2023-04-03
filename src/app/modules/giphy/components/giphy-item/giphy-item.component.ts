@@ -13,12 +13,12 @@ export class GiphyItemComponent {
 
   constructor(private dialog: MatDialog) {}
 
-  selectGiphy(giphyId: string) {
+  selectGiphy() {
     this.dialog.open(GiphyDisplayComponent, {
-      minWidth: '700px',
+      width: 'auto',
       height: 'auto',
       data: {
-        giphyId,
+        giphy: this.giphy,
       },
     });
   }

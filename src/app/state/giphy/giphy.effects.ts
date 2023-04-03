@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { GiphyService } from '@core/services';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, switchMap, tap } from 'rxjs/operators';
+import { catchError, distinctUntilChanged, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import * as GiphyActions from './giphy.actions';
 
 @Injectable()
@@ -12,10 +12,9 @@ export class GiphyEffects {
   getGiphyTrending$ = createEffect(() =>
     this.actions$.pipe(
       ofType(GiphyActions.GetGiphyTrending),
-      tap(_ => console.log('request')),
-      switchMap(({ query }) => this.giphyService.getTrending(query)),
-      switchMap(({ data }) =>
-        of(GiphyActions.GetGiphyTrendingSuccess({ giphys: data }))
+      mergeMap(({ query }) => this.giphyService.getTrending(query)),
+      switchMap(({ data, pagination }) =>
+        of(GiphyActions.GetGiphyTrendingSuccess({ giphys: data, pagination }))
       ),
       catchError((error: HttpErrorResponse) =>
         of(GiphyActions.GetGiphyTrendingFailure({ error }))
@@ -26,9 +25,9 @@ export class GiphyEffects {
   getGiphySearch$ = createEffect(() =>
     this.actions$.pipe(
       ofType(GiphyActions.GetGiphySearch),
-      switchMap(({ query }) => this.giphyService.search(query)),
-      switchMap(({ data }) =>
-        of(GiphyActions.GetGiphySearchSuccess({ giphys: data }))
+      mergeMap(({ query }) => this.giphyService.search(query)),
+      switchMap(({ data, pagination }) =>
+        of(GiphyActions.GetGiphySearchSuccess({ giphys: data, pagination }))
       ),
       catchError((error: HttpErrorResponse) =>
         of(GiphyActions.GetGiphyTrendingFailure({ error }))

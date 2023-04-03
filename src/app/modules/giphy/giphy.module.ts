@@ -10,6 +10,7 @@ import {
 import { GiphyDisplayComponent } from './components/giphy-display/giphy-display.component';
 import { GiphyRoutingModule } from './giphy-routing.module';
 import { GiphyHomeComponent } from './pages';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,6 @@ import { GiphyHomeComponent } from './pages';
     GiphyItemComponent,
     GiphyHomeComponent,
   ],
-  imports: [CommonModule, CoreModule, GiphyRoutingModule],
+  imports: [CommonModule, CoreModule, GiphyRoutingModule, SharedModule],
 })
 export class GiphyModule {}

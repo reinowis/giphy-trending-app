@@ -31,12 +31,19 @@ export const giphyReducer = createReducer(
     setLoadingState(state, GiphyActions.GiphyActionTypes.GET_GIPHY_TRENDING)
   ),
 
-  on(GiphyActions.GetGiphyTrendingSuccess, (state, { giphys }) =>
-    giphyAdapter.setAll(
-      giphys,
-      setSuccessState(state, GiphyActions.GiphyActionTypes.GET_GIPHY_TRENDING)
-    )
-  ),
+  on(GiphyActions.GetGiphyTrendingSuccess, (state, { giphys, pagination }) => {
+    if (pagination.offset > 0) {
+      return giphyAdapter.addMany(
+        giphys,
+        setSuccessState(state, GiphyActions.GiphyActionTypes.GET_GIPHY_TRENDING)
+      );
+    } else {
+      return giphyAdapter.setAll(
+        giphys,
+        setSuccessState(state, GiphyActions.GiphyActionTypes.GET_GIPHY_TRENDING)
+      );
+    }
+  }),
 
   on(GiphyActions.GetGiphyTrendingFailure, (state, { error }) =>
     setErrorState(state, GiphyActions.GiphyActionTypes.GET_GIPHY_SEARCH, error)
@@ -46,12 +53,19 @@ export const giphyReducer = createReducer(
     setLoadingState(state, GiphyActions.GiphyActionTypes.GET_GIPHY_SEARCH)
   ),
 
-  on(GiphyActions.GetGiphySearchSuccess, (state, { giphys }) =>
-    giphyAdapter.setAll(
-      giphys,
-      setSuccessState(state, GiphyActions.GiphyActionTypes.GET_GIPHY_SEARCH)
-    )
-  ),
+  on(GiphyActions.GetGiphySearchSuccess, (state, { giphys, pagination }) => {
+    if (pagination.offset > 0) {
+      return giphyAdapter.addMany(
+        giphys,
+        setSuccessState(state, GiphyActions.GiphyActionTypes.GET_GIPHY_TRENDING)
+      );
+    } else {
+      return giphyAdapter.setAll(
+        giphys,
+        setSuccessState(state, GiphyActions.GiphyActionTypes.GET_GIPHY_TRENDING)
+      );
+    }
+  }),
 
   on(GiphyActions.GetGiphySearchFailure, (state, { error }) =>
     setErrorState(state, GiphyActions.GiphyActionTypes.GET_GIPHY_SEARCH, error)
