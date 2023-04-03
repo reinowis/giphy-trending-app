@@ -1,0 +1,15 @@
+@mixin form-line() {
+    form {
+        .mat-form-field {
+            display: block;
+        }
+    }
+}
+
+@mixin checkbox-layout() {
+    .mat-checkbox {
+        .mat-checkbox-layout {
+            margin: $spacing-xs 0;
+        }
+    }
+}

@@ -1,0 +1,13 @@
+<div class="search-container">
+  <form [formGroup]="searchForm" (submit)="search()" class="search-container__form">
+    <mat-form-field appearance="outline">
+      <mat-label>Search</mat-label>
+
+      <input matInput placeholder="Placeholder" formControlName="search" class="search-container__input">
+
+      <button mat-icon-button type="submit">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+</div>

@@ -1,0 +1,3 @@
+<div class="giphy-list" #container (scroll)="onScroll()" *ngIf="giphyList">
+  <app-giphy-item *ngFor="let giphy of giphyList" [giphy]="giphy"></app-giphy-item>
+</div>

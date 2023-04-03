@@ -1,0 +1,13 @@
+<div class="giphy-item" (click)="selectGiphy(giphy.id)">
+  <img class="giphy-item__image" [src]="giphy.images.downsized.url" alt="">
+  <div class="giphy-item__overlay">
+    <div class="giphy-item__overlay-content">
+      <p class="username">
+        {{ giphy.username }}
+      </p>
+      <p class="rating">
+        {{ giphy.rating }}
+      </p>
+    </div>
+  </div>
+</div>

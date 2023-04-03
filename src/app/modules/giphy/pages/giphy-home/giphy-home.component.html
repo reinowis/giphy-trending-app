@@ -1,0 +1,10 @@
+<mat-tab-group (selectedTabChange)="onTabChanged($event)">
+  <mat-tab label="Trending">
+    <app-giphy-list (isLoadMore)="onLoadMore($event)" [giphyList]="giphyList$ | async"></app-giphy-list>
+  </mat-tab>
+
+  <mat-tab label="Search">
+    <app-search-bar (searchEvent)="onSearch($event)"></app-search-bar>
+    <app-giphy-list (isLoadMore)="onLoadMore($event)" [giphyList]="giphyList$ | async"></app-giphy-list>
+  </mat-tab>
+</mat-tab-group>
