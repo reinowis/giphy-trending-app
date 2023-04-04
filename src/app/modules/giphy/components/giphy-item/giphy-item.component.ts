@@ -15,8 +15,8 @@ export class GiphyItemComponent {
 
   selectGiphy() {
     this.dialog.open(GiphyDisplayComponent, {
-      width: 'auto',
-      height: 'auto',
+      minWidth: '80vh',
+      minHeight: '80vh',
       data: {
         giphy: this.giphy,
       },

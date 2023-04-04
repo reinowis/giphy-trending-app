@@ -92,16 +92,28 @@
 
   &__image {
     max-width: 100%;
+
+    .image-loader {
+      text-align: center;
+
+      &__img {
+        width: auto;
+      }
+    }
   }
 
   &__content {
     display: flex;
     flex-direction: column;
     gap: $spacing-xs;
+    padding: $spacing-sm;
+    border: solid 1px $color-secondary;
+    border-radius: 8px;
 
     &__item {
       display: flex;
       align-items: center;
+      gap: $spacing-xxs;
     }
   }
 }

@@ -9,17 +9,23 @@
 </div>
 
 <div mat-dialog-content class="giphy-details">
-  <img [src]="giphy.images.original.url" [alt]="giphy.title" class="giphy-details__image"
-    [width]="giphy.images.original.width" [height]="giphy.images.original.height" />
+  <app-image-loader [src]="giphy.images.original.url" [alt]="giphy.title" class="giphy-details__image"
+  [width]="giphy.images.original.width" [height]="giphy.images.original.height"/>
 
   <div class="giphy-details__content">
     <div class="giphy-details__content__item">
       <mat-icon>person</mat-icon>
       <span>Username: {{ giphy.username || 'N/A'}}</span>
     </div>
+
     <div class="giphy-details__content__item">
       <mat-icon>star</mat-icon>
       <span>Rating: {{ giphy.rating}}</span>
+    </div>
+    
+    <div class="giphy-details__content__item">
+      <mat-icon>link</mat-icon>
+      <span>Shorten URL: {{ giphy.bitly_url}}</span>
     </div>
   </div>
 </div>
