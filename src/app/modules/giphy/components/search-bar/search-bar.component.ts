@@ -43,7 +43,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         distinctUntilChanged(),
-        tap((_) => this.search())
+        tap(() => this.search())
       )
       .subscribe();
   }

@@ -11,9 +11,15 @@ export class ImageLoaderComponent {
   @Input() width?: number | string;
   @Input() height?: number | string;
 
-  loading: boolean = true;
+  loading = true;
+  error = false;
 
   hideLoading() {
     this.loading = false;
+  }
+
+  onError() {
+    this.loading = false;
+    this.error = true;
   }
 }

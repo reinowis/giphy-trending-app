@@ -29,8 +29,6 @@ export interface Giphy {
   };
 }
 
-export interface GiphyQuery {}
-
 export interface GiphyBaseRequest {
   limit: number;
   offset: number;

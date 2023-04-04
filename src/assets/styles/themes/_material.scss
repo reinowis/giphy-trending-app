@@ -2,14 +2,21 @@
 
 @include mat.core();
 
-$my-primary: mat.define-palette(mat.$indigo-palette);
-$my-accent: mat.define-palette(mat.$blue-palette);
+$primary-color-palette: createPalette($primary-color);
+$secondary-color-palette: createPalette($secondary-color);
 
-$my-theme: mat.define-light-theme((
-  color: (
-    primary: $my-primary,
-    accent: $my-accent,
+$my-primary: mat.define-palette($primary-color-palette);
+$my-accent: mat.define-palette($secondary-color-palette);
+$my-error: mat.define-palette(mat.$red-palette);
+
+$my-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+      warn: $my-error,
+    ),
   )
-));
+);
 
 @include mat.all-component-themes($my-theme);

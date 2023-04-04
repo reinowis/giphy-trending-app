@@ -2,6 +2,7 @@
   &__wrapper {
     display: flex;
     justify-content: center;
+    padding: $spacing-sm $spacing-xs;
   }
 
   &__dot {
@@ -14,24 +15,24 @@
 
     &:before,
     &:after {
-        content: "";
-        display: inline-block;
-        position: absolute;
-        top: 0;
-        width: 10px;
-        height: 10px;
-        background-color: #9880ff;
-        border-radius: 10px;
+      content: "";
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      width: 10px;
+      height: 10px;
+      background-color: #9880ff;
+      border-radius: 10px;
     }
 
     &:before {
-        left: -15px;
-        animation: dot-elastic-before 1s infinite linear;
+      left: -15px;
+      animation: dot-elastic-before 1s infinite linear;
     }
 
     &:after {
-        left: 15px;
-        animation: dot-elastic-after 1s infinite linear;
+      left: 15px;
+      animation: dot-elastic-after 1s infinite linear;
     }
   }
 }

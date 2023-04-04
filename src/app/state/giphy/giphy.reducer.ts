@@ -49,7 +49,7 @@ export const giphyReducer = createReducer(
     setErrorState(state, GiphyActions.GiphyActionTypes.GET_GIPHY_SEARCH, error)
   ),
 
-  on(GiphyActions.GetGiphySearch, (state, { query }) =>
+  on(GiphyActions.GetGiphySearch, (state) =>
     setLoadingState(state, GiphyActions.GiphyActionTypes.GET_GIPHY_SEARCH)
   ),
 

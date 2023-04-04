@@ -5,7 +5,6 @@ import {
   EventEmitter,
   Input,
   OnDestroy,
-  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -14,6 +13,7 @@ import { Giphy } from '@shared/models';
 import { AppState, getGiphysLoadingSelector } from '@state';
 import {
   ReplaySubject,
+  debounceTime,
   distinctUntilChanged,
   filter,
   fromEvent,
@@ -27,7 +27,7 @@ import {
   templateUrl: './giphy-list.component.html',
   styleUrls: ['./giphy-list.component.scss'],
 })
-export class GiphyListComponent implements OnInit, OnDestroy, AfterViewInit {
+export class GiphyListComponent implements OnDestroy, AfterViewInit {
   @Input() giphyList: Array<Giphy> | null;
   @Output() isLoadMore = new EventEmitter<boolean>();
 
@@ -37,8 +37,6 @@ export class GiphyListComponent implements OnInit, OnDestroy, AfterViewInit {
   loading$ = this.store.select(getGiphysLoadingSelector);
 
   constructor(private store: Store<AppState>) {}
-
-  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.destroy$.next(true);
@@ -54,6 +52,7 @@ export class GiphyListComponent implements OnInit, OnDestroy, AfterViewInit {
       .pipe(
         takeUntil(this.destroy$),
         distinctUntilChanged(),
+        debounceTime(500),
         map((e) => {
           const target = e.target as HTMLElement;
           const scrollPosition = target.scrollTop + target.clientHeight;

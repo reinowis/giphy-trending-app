@@ -1,10 +1,10 @@
-<mat-tab-group (selectedTabChange)="onTabChanged($event)" class="giphy-container" dynamicHeight>
+<mat-tab-group (selectedTabChange)="onTabChanged($event)" class="giphy-container" dynamicHeight color="primary" backgroundColor="primary">
   <mat-tab>
     <ng-template mat-tab-label>
       <mat-icon>trending_up</mat-icon>
       Trending
     </ng-template>
-    <app-giphy-list (isLoadMore)="onLoadMore($event)" [giphyList]="giphyList$ | async" class="giphy-container__list-wrapper"></app-giphy-list>
+    <app-giphy-list (isLoadMore)="onLoadMore($event)" [giphyList]="giphyList$ | async" class="giphy-container__wrapper"></app-giphy-list>
   </mat-tab>
 
   <mat-tab>
@@ -13,6 +13,6 @@
       Search
     </ng-template>
     <app-search-bar (searchEvent)="onSearch($event)"></app-search-bar>
-    <app-giphy-list (isLoadMore)="onLoadMore($event)" [giphyList]="giphyList$ | async" class="giphy-container__list-wrapper"></app-giphy-list>
+    <app-giphy-list (isLoadMore)="onLoadMore($event)" [giphyList]="giphyList$ | async" class="giphy-container__wrapper"></app-giphy-list>
   </mat-tab>
 </mat-tab-group>

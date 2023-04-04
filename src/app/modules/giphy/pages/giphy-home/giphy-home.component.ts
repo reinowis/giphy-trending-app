@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Store } from '@ngrx/store';
 import { Giphy, GiphySearchPayload } from '@shared';
-import { DEFAULT_GIPHY_QUERY } from '@shared/constants';
+import { DEFAULT_GIPHY_QUERY, GiphyBrowsingTypes } from '@shared/constants';
 import { AppState } from '@state';
 import { GiphyActions, getGiphysSelector } from '@state/giphy';
 import { Observable, ReplaySubject } from 'rxjs';
@@ -12,11 +12,11 @@ import { Observable, ReplaySubject } from 'rxjs';
   templateUrl: './giphy-home.component.html',
   styleUrls: ['./giphy-home.component.scss'],
 })
-export class GiphyHomeComponent implements OnInit {
+export class GiphyHomeComponent implements OnInit, OnDestroy {
   destroy$ = new ReplaySubject<boolean>();
   giphyList$: Observable<Giphy[]> = this.store.select(getGiphysSelector);
 
-  type: string = 'TRENDING';
+  type: string = GiphyBrowsingTypes.TRENDING;
   query: GiphySearchPayload = DEFAULT_GIPHY_QUERY;
 
   constructor(private store: Store<AppState>) {}
@@ -35,7 +35,7 @@ export class GiphyHomeComponent implements OnInit {
   }
 
   private fetchGiphyList() {
-    if (this.type === 'TRENDING') {
+    if (this.type === GiphyBrowsingTypes.TRENDING) {
       this.store.dispatch(GiphyActions.GetGiphyTrending({ query: this.query }));
     } else {
       this.store.dispatch(GiphyActions.GetGiphySearch({ query: this.query }));

@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { environment } from 'environments/environment';
+import { Injectable } from '@angular/core';
 import { GiphyBaseRequest, GiphyResponse, GiphySearchPayload } from '@shared';
 import {
   GIPHY_SEARCH_ENDPOINT,
   GIPHY_TRENDING_ENDPOINT,
 } from '@shared/constants';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -24,10 +24,10 @@ export class GiphyService {
     params = params.append('api_key', this.api_key);
 
     if (requestParams) {
-      const reqBodyEntries: Array<[string, any]> =
+      const reqBodyEntries: Array<[string, string | number]> =
         Object.entries(requestParams);
 
-      reqBodyEntries.forEach(([key, value]: [string, any]) => {
+      reqBodyEntries.forEach(([key, value]: [string, string | number]) => {
         if (value !== undefined) {
           params = params.append(key, value);
         }

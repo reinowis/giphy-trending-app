@@ -1,0 +1,5 @@
+@use '@angular/material' as mat;
+
+body {
+    background-color: mat.get-color-from-palette($my-primary, primary, 50);
+}
